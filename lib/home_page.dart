@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
-import 'atividades_page.dart';
+import 'consultar_page.dart';
 import 'gerenciar_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,11 +18,13 @@ class _HomePageState extends State<HomePage> {
         title: Text('Tempus'),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextButton.icon(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AtividadesPage()));
+                    MaterialPageRoute(builder: (context) => ConsultarPage()));
               },
               icon: Icon(Icons.search),
               label: Text('Consultar')),
