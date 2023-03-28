@@ -13,33 +13,39 @@ class _ConsultarPageState extends State<ConsultarPage> {
 
 
 
+
+
+
   @override
   Widget build(BuildContext context) {
   ConteudoRepository repository = ConteudoRepository();
+
 
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Atividades'),
       ),
-      body: ValueListenableBuilder(
-          valueListenable: repository.conteudosBox.listenable(),
+      body: ValueListenableBuilder<Box>(
+          valueListenable: Hive.box('conteudos').listenable(),
           builder: (context, box, widget) {
             var listaconteudo = <Widget>[];
             for (var chave in box.keys) {
               final conteudo = box.get(chave);
-              final textWidget = Text(conteudo["id"].toString());
-            
-              return ListView(
-                children: listaconteudo
+              
 
-                ,
-              ); 
+              final textWidget = Text(conteudo["id"].toString());
+              listaconteudo.add(textWidget);
+              print(box.get(chave));
+            
+              
               
               
             }
+            return ListView(
+                children: listaconteudo,
+              ); 
             
-            return Text('Nenhum conteudo encontrado');
           }),
     );
   }
