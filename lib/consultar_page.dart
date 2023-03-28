@@ -27,14 +27,16 @@ class _ConsultarPageState extends State<ConsultarPage> {
         title: Text('Atividades'),
       ),
       body: ValueListenableBuilder<Box>(
-          valueListenable: Hive.box('conteudos').listenable(),
+          valueListenable: Hive.box('conteudo').listenable(),
           builder: (context, box, widget) {
             var listaconteudo = <Widget>[];
             for (var chave in box.keys) {
               final conteudo = box.get(chave);
               
+print(conteudo.toString());
 
-              final textWidget = Text(conteudo["id"].toString());
+
+              final textWidget = Text(conteudo['id'].toString());
               listaconteudo.add(textWidget);
               print(box.get(chave));
             
