@@ -10,10 +10,14 @@ class ConsultarPage extends StatefulWidget {
 }
 
 class _ConsultarPageState extends State<ConsultarPage> {
-  ConteudoRepository repository = ConteudoRepository();
+
+
 
   @override
   Widget build(BuildContext context) {
+  ConteudoRepository repository = ConteudoRepository();
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Atividades'),
@@ -21,13 +25,18 @@ class _ConsultarPageState extends State<ConsultarPage> {
       body: ValueListenableBuilder(
           valueListenable: repository.conteudosBox.listenable(),
           builder: (context, box, widget) {
+            var listaconteudo = <Widget>[];
             for (var chave in box.keys) {
-              var conteudo = box.get(chave);
+              final conteudo = box.get(chave);
+              final textWidget = Text(conteudo["id"].toString());
             
-              return ListTile(
-                leading: Text(conteudo),
+              return ListView(
+                children: listaconteudo
+
+                ,
+              ); 
               
-              );
+              
             }
             
             return Text('Nenhum conteudo encontrado');

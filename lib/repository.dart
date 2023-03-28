@@ -1,25 +1,19 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:tempusapp/conteudo.dart';
-
+import 'conteudo.dart';
 class ConteudoRepository {
-    static late Box _conteudosBox;
 
-
-
+     late Box _conteudosBox;
 
 ConteudoRepository(){
-initRepository();
+initRepo();
 }
 
 
- initRepository()  {
-    OpenBoxe();      
-    
-  }
+void initRepo() async{
+await Hive.initFlutter();
+_conteudosBox = await abrirCaixa();
 
-OpenBoxe() async{
-  _conteudosBox = await Hive.openBox('conteudos');
 }
 
 
@@ -27,6 +21,7 @@ OpenBoxe() async{
   Box get conteudosBox => _conteudosBox;
 
   Future<Box> abrirCaixa() async {
+    
     return await Hive.openBox('conteudos');
   }
 

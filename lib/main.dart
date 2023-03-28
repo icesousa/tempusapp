@@ -5,10 +5,9 @@ import 'home_page.dart';
 
 
 void main() async{
-  await Hive.initFlutter();
-await ConteudoRepository();
+  
+   ConteudoRepository().initRepo();
 
- 
   
   
   runApp(TempusApp());
