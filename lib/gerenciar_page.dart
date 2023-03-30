@@ -4,7 +4,8 @@ import 'package:tempusapp/conteudo.dart';
 import 'repository.dart';
 
 class GerenciarPage extends StatefulWidget {
-  const GerenciarPage({super.key});
+   GerenciarPage({super.key, this.conteudo});
+  Conteudo? conteudo;
 
   @override
   State<GerenciarPage> createState() => _GerenciarPageState();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:tempusapp/repository.dart';
+import 'package:tempusapp/gerenciar_page.dart';
 
 class ConsultarPage extends StatefulWidget {
   const ConsultarPage({super.key});
@@ -10,18 +10,8 @@ class ConsultarPage extends StatefulWidget {
 }
 
 class _ConsultarPageState extends State<ConsultarPage> {
-
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
-  ConteudoRepository repository = ConteudoRepository();
-
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Atividades'),
@@ -32,22 +22,29 @@ class _ConsultarPageState extends State<ConsultarPage> {
             var listaconteudo = <Widget>[];
             for (var chave in box.keys) {
               final conteudo = box.get(chave);
-              
-print(conteudo.toString());
 
+              print(conteudo.toString());
 
               final textWidget = Text(conteudo['id'].toString());
-              listaconteudo.add(textWidget);
-              print(box.get(chave));
-            
-              
-              
-              
+
+              final tileWidget = ListTile(
+                leading: CircleAvatar(
+                    child: Icon(conteudo['tipo'] == 'Audio'
+                        ? Icons.headphones
+                        : Icons.tv)),
+                title: Text(conteudo['descricao']),
+                subtitle: Text(conteudo['tipo']),
+                trailing: Icon(Icons.edit),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => GerenciarPage(conteudo: conteudo.toMap)));
+                },
+              );
+              listaconteudo.add(tileWidget);
             }
             return ListView(
-                children: listaconteudo,
-              ); 
-            
+              children: listaconteudo,
+            );
           }),
     );
   }
