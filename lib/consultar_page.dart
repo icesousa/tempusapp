@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tempusapp/consts.dart';
+import 'package:tempusapp/conteudo.dart';
 import 'package:tempusapp/gerenciar_page.dart';
+import 'package:tempusapp/repository.dart';
 
 class ConsultarPage extends StatefulWidget {
   const ConsultarPage({super.key});
@@ -10,6 +13,8 @@ class ConsultarPage extends StatefulWidget {
 }
 
 class _ConsultarPageState extends State<ConsultarPage> {
+  ConteudoRepository repository = ConteudoRepository.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,28 +22,34 @@ class _ConsultarPageState extends State<ConsultarPage> {
         title: Text('Atividades'),
       ),
       body: ValueListenableBuilder<Box>(
-          valueListenable: Hive.box('conteudo').listenable(),
+          valueListenable: repository.conteudoBox.listenable(),
           builder: (context, box, widget) {
             var listaconteudo = <Widget>[];
             for (var chave in box.keys) {
               final conteudo = box.get(chave);
-
-              print(conteudo.toString());
-
-              final textWidget = Text(conteudo['id'].toString());
-
-              final tileWidget = ListTile(
-                leading: CircleAvatar(
-                    child: Icon(conteudo['tipo'] == 'Audio'
-                        ? Icons.headphones
-                        : Icons.tv)),
-                title: Text(conteudo['descricao']),
-                subtitle: Text(conteudo['tipo']),
-                trailing: Icon(Icons.edit),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => GerenciarPage(conteudo: conteudo.toMap)));
+              final tileWidget = Dismissible(
+                key: ValueKey<int>(conteudo["id"]),
+                onDismissed: (direction) {
+                  repository.deletarConteudo(conteudo["id"]);
                 },
+                child: ListTile(
+                  leading: CircleAvatar(
+                      child: Icon(conteudo['tipo'] == AUDIO
+                          ? Icons.headphones
+                          : Icons.tv)),
+                  title: Text(conteudo['descricao']),
+                  subtitle: Text(conteudo['tipo']),
+                  trailing: Icon(Icons.edit),
+                  onTap: () {
+                    setState(() {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => GerenciarPage(
+                                  conteudo: Conteudo.fromMap(conteudo))));
+                    });
+                  },
+                ),
               );
               listaconteudo.add(tileWidget);
             }
