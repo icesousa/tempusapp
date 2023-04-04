@@ -1,15 +1,17 @@
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'conteudo.dart';
 
 class ConteudoRepository {
   late Box _conteudoBox;
 
-  ConteudoRepository() {
-    initRepo();
-  }
+  // Singleton
+  static final ConteudoRepository _instance = ConteudoRepository._internal();
+  factory ConteudoRepository() => _instance;
+  ConteudoRepository._internal();
+  static ConteudoRepository get instance => _instance;
 
-  void initRepo() async {
+
+Future<void> initRepo() async {
     await Hive.initFlutter();
     _conteudoBox = await abrirCaixa();
   }
@@ -22,7 +24,14 @@ class ConteudoRepository {
 
   Future<void> adicionarConteudo(Conteudo conteudo) async {
     var box = await Hive.openBox('conteudo');
-    await box.put(conteudo.id, conteudo.tomap());
-    print(box.get(conteudo.id));
+    await box.put(conteudo.id, conteudo.toMap());
   }
+
+Future<void> deletarConteudo(int id) async{
+  var box = await Hive.openBox('conteudo');
+  await box.delete(id);
+
+}
+
+
 }
