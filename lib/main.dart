@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tempusapp/consts.dart';
 import 'package:tempusapp/repository.dart';
 import 'home_page.dart';
 
 
 void main() async{
-  
-   ConteudoRepository().initRepo();
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await ConteudoRepository.instance.initRepo();
   
   
   runApp(TempusApp());
@@ -21,9 +21,7 @@ class TempusApp extends StatelessWidget {
     
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-      ),
+      theme: customThemeData(),
       home: HomePage(),
     );
   }
