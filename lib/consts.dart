@@ -1,12 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
-const String AUDIO = "Áudio";
-const String VIDEO = "Vídeo";
+const String audio = "Áudio";
+const String video = "Vídeo";
 
 Widget customTextStl(String title) {
   return Text(title,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w600,
       ));

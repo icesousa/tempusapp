@@ -6,7 +6,7 @@ import 'gerenciar_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key, required this.themeMode, required this.onThemeChanged});
-  ThemeMode themeMode;
+   ThemeMode themeMode;
   final ValueChanged<ThemeMode> onThemeChanged;
 
   @override
@@ -42,27 +42,27 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tempus'),
-        actions: [IconButton(onPressed: _toggleTheme, icon: Icon(Icons.light))],
+        title: const Text('Tempus'),
+        actions: [IconButton(onPressed: _toggleTheme, icon: const Icon(Icons.light))],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Spacer(),
+            const Spacer(),
             Center(
                 child: Container(
               child: Column(
                 children: [
                   Text(
                     economizou.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 200,
                         fontWeight: FontWeight.w300,
                         ),
                   ),
-                  Text(
+                  const Text(
                     'Minutos Economizados',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 30,),
@@ -70,38 +70,36 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             )),
-            Spacer(),
+            const Spacer(),
             ElevatedButton.icon(
                 onPressed: () {
                   Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ConsultarPage()))
+                              builder: (context) => const ConsultarPage()))
                       .then((retorno) {
                     if (retorno != null && retorno == true) {
                       atualizarTempoEconomizado();
-                      print('testado');
                     }
                   });
                 },
-                icon: Icon(Icons.search),
-                label: Text('Consultar')),
-                SizedBox(height: 10,),
+                icon: const Icon(Icons.search),
+                label: const Text('Consultar')),
+                const SizedBox(height: 10,),
             ElevatedButton.icon(
                 onPressed: () {
-                  print(economizou);
                   Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => GerenciarPage()))
+                              builder: (context) => const GerenciarPage()))
                       .then((retorno) {
                     if (retorno != null && retorno) {
                       atualizarTempoEconomizado();
                     }
                   });
                 },
-                icon: Icon(Icons.add),
-                label: Text('Adicionar')),
+                icon: const Icon(Icons.add),
+                label: const Text('Adicionar')),
           ],
         ),
       ),

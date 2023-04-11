@@ -7,7 +7,7 @@ import 'repository.dart';
 import 'repository_inherited.dart';
 
 class GerenciarPage extends StatefulWidget {
-  GerenciarPage({super.key, this.conteudo});
+  const GerenciarPage({super.key, this.conteudo});
   final Conteudo? conteudo;
 
   @override
@@ -34,17 +34,17 @@ class _GerenciarPageState extends State<GerenciarPage> {
     });
   }
 
-  String? _tipo = AUDIO;
+  String? _tipo = audio;
   int? _indexvelocidade = 1;
   double _minutes = 20;
 
-  List<double> _velocidadelist = [
+  final List<double> _velocidadelist = [
     1.25,
     1.50,
     1.75,
     2.0,
   ];
-  TextEditingController _descricaocontroller = TextEditingController();
+  final TextEditingController _descricaocontroller = TextEditingController();
   ConteudoRepository repository = ConteudoRepository();
 
   @override
@@ -62,7 +62,7 @@ class _GerenciarPageState extends State<GerenciarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Gerenciar'),
+          title: const Text('Gerenciar'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -74,9 +74,9 @@ class _GerenciarPageState extends State<GerenciarPage> {
                   customTextStl('Tipo de Conteudo'),
                   DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
-                        items: [
-                          DropdownMenuItem(child: Text(AUDIO), value: AUDIO),
-                          DropdownMenuItem(child: Text(VIDEO), value: VIDEO),
+                        items: const [
+                          DropdownMenuItem(value: audio, child: Text(audio)),
+                          DropdownMenuItem(value: video, child: Text(video)),
                         ],
                         value: _tipo,
                         onChanged: (novovalor) {
@@ -87,14 +87,14 @@ class _GerenciarPageState extends State<GerenciarPage> {
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               customTextStl('Velocidade'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:
                     List<Widget>.generate(_velocidadelist.length, (index) {
                   return ChoiceChip(
-                    selectedColor: Color(0xff9b1b30),
+                    selectedColor: const Color(0xff9b1b30),
                     label: Text(
                         _velocidadelist.elementAt(index).toStringAsFixed(2)),
                     selected: _indexvelocidade == index,
@@ -106,7 +106,7 @@ class _GerenciarPageState extends State<GerenciarPage> {
                   );
                 }),
               ),
-              Divider(),
+              const Divider(),
               customTextStl('Minutos '),
               Row(
                 children: [
@@ -125,21 +125,21 @@ class _GerenciarPageState extends State<GerenciarPage> {
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               customTextStl('O que assistiu / ouviu?'),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
                 controller: _descricaocontroller,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               ElevatedButton.icon(
                   onHover: (value) {},
                   onPressed: _saveConteudo,
-                  icon: Icon(Icons.check),
-                  label: Text('Salvar'))
+                  icon: const Icon(Icons.check),
+                  label: const Text('Salvar'))
             ],
           ),
         ));

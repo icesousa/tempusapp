@@ -20,8 +20,8 @@ class _ConsultarPageState extends State<ConsultarPage> {
       appBar: AppBar(
         leading: IconButton(onPressed: () {
           Navigator.pop(context, retorno);
-        }, icon: Icon(Icons.arrow_back)),
-        title: Text('Atividades'),
+        }, icon: const Icon(Icons.arrow_back)),
+        title: const Text('Atividades'),
       ),
       body: ValueListenableBuilder<Box>(
           valueListenable: RepositoryInherited.of(context)!
@@ -38,7 +38,7 @@ class _ConsultarPageState extends State<ConsultarPage> {
                   color: Colors.redAccent,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
+                    children: const [
                       Icon(
                         Icons.delete, size: 45,
                         color: Colors.white,
@@ -55,8 +55,8 @@ class _ConsultarPageState extends State<ConsultarPage> {
                 },
                 child: ListTile(
                   leading: CircleAvatar(
-                    backgroundColor: Color(0xff9b1b30),
-                      child: Icon(conteudo['tipo'] == AUDIO
+                    backgroundColor: const Color(0xff9b1b30),
+                      child: Icon(conteudo['tipo'] == audio
                           ? Icons.headphones
                           : Icons.tv,color: Colors.white, )) ,
                   title: customTextStl("${conteudo['descricao']}" ),
@@ -65,11 +65,11 @@ class _ConsultarPageState extends State<ConsultarPage> {
                   subtitle: Row(
                     children: [
                       Text(conteudo['tipo']),
-                      SizedBox(width: 10,),
+                      const SizedBox(width: 10,),
                       Text("—  ${conteudo['minutos']} minutos")
                     ],
                   ),
-                  trailing: Icon(Icons.edit),
+                  trailing: const Icon(Icons.edit),
                   onTap: () {
                     setState(() {
                       Navigator.push(

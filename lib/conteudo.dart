@@ -13,9 +13,9 @@ class Conteudo {
     this.minutos,
     this.velocidade,
     this.tempo,
-  ) {
+  );
     
-  }
+  
 
   Map<String, dynamic> toMap() {
     return {
